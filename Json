@@ -1,25 +1,15 @@
-async function fetchGames() {
-    try {
-        const response = await fetch('games.json');
-        const games = await response.json();
-        const grid = document.getElementById('game-grid');
-
-        games.forEach(game => {
-            const card = document.createElement('div');
-            card.className = 'game-card';
-            
-            card.innerHTML = `
-                <h2>${game.name}</h2>
-                <p>${game.description}</p>
-                <div class="iframe-container">
-                    <iframe src="${game.url}" scrolling="no" allowfullscreen></iframe>
-                </div>
-            `;
-            grid.appendChild(card);
-        });
-    } catch (err) {
-        console.error("Error loading games:", err);
+function runSearch() {
+    const query = document.getElementById('userQuery').value;
+    const viewBox = document.getElementById('view-box');
+    
+    if (query) {
+        // We use the 'lite' version of DuckDuckGo because it allows iframing
+        const searchUrl = `https://duckduckgo.com/lite/?q=${encodeURIComponent(query)}`;
+        
+        viewBox.innerHTML = `
+            <iframe src="${searchUrl}" 
+                    style="width:100%; height:600px; border:none; background: white;" 
+                    allowfullscreen>
+            </iframe>`;
     }
 }
-
-fetchGames();
