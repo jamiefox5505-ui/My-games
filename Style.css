@@ -1,29 +1,59 @@
-.browser-section {
-    background: #222;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 1000px;
+body {
+    background-color: #0d0d0d;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    text-align: center;
+}
+
+/* Navbar Styling */
+.navbar {
+    background: #1a1a1a;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    border-bottom: 2px solid #00ffcc;
+}
+
+.nav-btn {
+    background: transparent;
+    color: #00ffcc;
+    border: 2px solid #00ffcc;
+    padding: 8px 25px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.nav-btn:hover {
+    background: #00ffcc;
+    color: #000;
+}
+
+/* Tab Logic */
+.tab-content { display: none; padding: 20px; }
+.tab-content.active { display: block; }
+
+/* Browser Window */
+.browser-container {
+    background: white;
     border-radius: 10px;
     overflow: hidden;
-    border: 2px solid #00ffcc;
+    max-width: 900px;
+    margin: 20px auto;
 }
 
-.browser-bar {
-    background: #333;
-    padding: 10px;
-    display: flex;
-    gap: 10px;
+.browser-bar { background: #333; padding: 10px; display: flex; }
+.browser-bar input { flex-grow: 1; padding: 10px; border: none; }
+#view-box { height: 600px; width: 100%; color: black; }
+
+/* Game Grid */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
 }
 
-.browser-bar input {
-    flex-grow: 1;
-    padding: 8px;
-    border-radius: 5px;
-    border: none;
-}
-
-#browser-window {
-    background: white;
-    height: 500px;
-    width: 100%;
-}
+.game-card { background: #1a1a1a; padding: 15px; border-radius: 10px; border: 1px solid #333; }
+.game-card iframe { width: 100%; height: 250px; border-radius: 5px; }
