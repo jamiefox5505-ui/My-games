@@ -1,47 +1,51 @@
-console.log("Script is running!");
+// This runs as soon as the page loads
+window.onload = function() {
+    showTab('home');
+    fetchGames();
+};
 
-// 1. Tab Switching
+// Tab Switching Logic
 function showTab(tabName) {
-    console.log("Switching to: " + tabName);
-    const home = document.getElementById('home');
-    const games = document.getElementById('games');
+    const homeTab = document.getElementById('home');
+    const gamesTab = document.getElementById('games');
     
     if (tabName === 'home') {
-        home.style.display = 'block';
-        games.style.display = 'none';
+        homeTab.style.display = 'block';
+        gamesTab.style.display = 'none';
     } else {
-        home.style.display = 'none';
-        games.style.display = 'block';
-        fetchGames(); // Load games when clicking the tab
+        homeTab.style.display = 'none';
+        gamesTab.style.display = 'block';
     }
 }
 
-// 2. Search Logic
+// Search Logic: Opens in a new tab to prevent "Blank Screen" errors
 function runSearch() {
     const query = document.getElementById('userQuery').value;
-    const viewBox = document.getElementById('view-box');
-    const url = "https://duckduckgo.com/lite/?q=" + encodeURIComponent(query);
-    viewBox.innerHTML = '<iframe src="' + url + '" style="width:100%; height:600px; border:none; background:white;"></iframe>';
+    if (query) {
+        window.open(`https://duckduckgo.com/?q=${encodeURIComponent(query)}`, '_blank');
+    }
 }
 
-// 3. Simple Game Loader
+// Games Logic: Loads your JSON file
 async function fetchGames() {
     const grid = document.getElementById('game-grid');
     try {
-        const res = await fetch('./games.json');
-        const data = await res.json();
-        grid.innerHTML = ''; 
-        
-        data.forEach(g => {
-            const div = document.createElement('div');
-            div.className = 'game-card';
-            div.innerHTML = '<h3>' + g.name + '</h3><iframe src="' + g.url + '" style="width:100%; height:300px; border:none;"></iframe>';
-            grid.appendChild(div);
+        const response = await fetch('./games.json');
+        const games = await response.json();
+        grid.innerHTML = ''; // Clears loading text
+
+        games.forEach(game => {
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            card.innerHTML = `
+                <h3>${game.name}</h3>
+                <div class="iframe-container">
+                    <iframe src="${game.url}" scrolling="no" allowfullscreen></iframe>
+                </div>
+            `;
+            grid.appendChild(card);
         });
-    } catch (e) {
-        grid.innerHTML = '<p>Error loading games. Check games.json name!</p>';
+    } catch (err) {
+        grid.innerHTML = '<p>Error loading games. Make sure games.json is lowercase!</p>';
     }
 }
-
-// Start on Home
-showTab('home');
