@@ -64,3 +64,4 @@ card.innerHTML = `
         </iframe>
     </div>
 `;
+const response = await fetch('./games.json');
