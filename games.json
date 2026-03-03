@@ -8,3 +8,20 @@
     "url": "https://unblocked-games.s3.amazonaws.com/1v1-lol.html"
   }
 ]
+function runSearch() {
+    const query = document.getElementById('userQuery').value;
+    const viewBox = document.getElementById('view-box');
+    
+    // We use 'DuckDuckGo Lite' and force it to stay in the iframe
+    // If it still fails, it will show a clear error message now
+    if (query) {
+        const searchUrl = `https://duckduckgo.com/lite/?q=${encodeURIComponent(query)}`;
+        viewBox.innerHTML = `
+            <iframe 
+                src="${searchUrl}" 
+                style="width:100%; height:100%; border:none; background:white;"
+                sandbox="allow-forms allow-scripts allow-same-origin"
+                loading="lazy">
+            </iframe>`;
+    }
+}
