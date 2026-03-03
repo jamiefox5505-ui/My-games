@@ -49,3 +49,18 @@ async function fetchGames() {
         grid.innerHTML = '<p>Error loading games. Make sure games.json is lowercase!</p>';
     }
 }
+// ... inside your fetchGames function ...
+const card = document.createElement('div');
+card.className = 'game-card';
+card.innerHTML = `
+    <h3>${game.name}</h3>
+    <div class="iframe-container">
+        <iframe 
+            src="${game.url}" 
+            scrolling="no" 
+            allowfullscreen 
+            sandbox="allow-scripts allow-same-origin allow-forms"
+            loading="lazy">
+        </iframe>
+    </div>
+`;
