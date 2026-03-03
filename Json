@@ -1,9 +1,10 @@
-function runSearch() {
-    const query = document.getElementById('userQuery').value;
-    const viewBox = document.getElementById('view-box');
-    
-    // Using DDG Lite because the main site blocks itself from being in a "box"
-    const searchUrl = `https://duckduckgo.com/lite/?q=${encodeURIComponent(query)}`;
-    
-    viewBox.innerHTML = `<iframe src="${searchUrl}" style="width:100%; height:100%; border:none; background:white;"></iframe>`;
-}
+[
+  {
+    "name": "Retro Bowl",
+    "url": "https://game316022.konggames.com/gamez/0031/6022/live/index.html"
+  },
+  {
+    "name": "1v1.LOL",
+    "url": "https://unblocked-games.s3.amazonaws.com/1v1-lol.html"
+  }
+]
