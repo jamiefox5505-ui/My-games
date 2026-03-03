@@ -2,14 +2,8 @@ function runSearch() {
     const query = document.getElementById('userQuery').value;
     const viewBox = document.getElementById('view-box');
     
-    if (query) {
-        // We use the 'lite' version of DuckDuckGo because it allows iframing
-        const searchUrl = `https://duckduckgo.com/lite/?q=${encodeURIComponent(query)}`;
-        
-        viewBox.innerHTML = `
-            <iframe src="${searchUrl}" 
-                    style="width:100%; height:600px; border:none; background: white;" 
-                    allowfullscreen>
-            </iframe>`;
-    }
+    // Using DDG Lite because the main site blocks itself from being in a "box"
+    const searchUrl = `https://duckduckgo.com/lite/?q=${encodeURIComponent(query)}`;
+    
+    viewBox.innerHTML = `<iframe src="${searchUrl}" style="width:100%; height:100%; border:none; background:white;"></iframe>`;
 }
